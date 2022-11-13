@@ -45,26 +45,30 @@ export async function cluster(mapDataPoint) {
     }
 
     let cluster1_s = [];
+    let cluster2_s = [];
+    let cluster3_s = [];
+    let cluster4_s = [];
+
+    let cluster5_s = [];
     for (let i = 0; i < final_result[0].elements.length; i++) {
         cluster1_s.push(final_result[0].elements[i]);
     }
 
-    let cluster2_s = [];
+    
     for (let i = 0; i < final_result[1].elements.length; i++) {
         cluster2_s.push(final_result[1].elements[i]);
     }
 
-    let cluster3_s = [];
+    
     for (let i = 0; i < final_result[2].elements.length; i++) {
         cluster3_s.push(final_result[2].elements[i]);
     }
 
-    let cluster4_s = [];
+  
     for (let i = 0; i < final_result[3].elements.length; i++) {
         cluster4_s.push(final_result[3].elements[i]);
     }
 
-    let cluster5_s = [];
     for (let i = 0; i < final_result[4].elements.length; i++) {
         cluster5_s.push(final_result[4].elements[i]);
     }
@@ -76,6 +80,7 @@ export async function cluster(mapDataPoint) {
     let cluster3_e = [];
     let cluster4_e = [];
     let cluster5_e = [];
+    let len_d_5 = [];
 
     cluster1_s.forEach((element) => {
         for (let i = 0; i < data_c.length; i++) {
@@ -122,28 +127,30 @@ export async function cluster(mapDataPoint) {
     let cluster1_dest_cluster_3 = geocluster(cluster1_e, 0.5);
     let cluster1_dest_cluster_4 = geocluster(cluster1_e, 0.5);
     let cluster1_dest_cluster_5 = geocluster(cluster1_e, 0.5);
-
     let len_d_1 = [];
+    let len_d_2 = [];
+    let len_d_3 = [];
+    let len_d_4 = [];
     for (let i = 0; i < cluster1_dest_cluster_1.length; i++) {
         len_d_1.push(cluster1_dest_cluster_1[i].elements.length);
     }
 
-    let len_d_2 = [];
+    
     for (let i = 0; i < cluster1_dest_cluster_2.length; i++) {
         len_d_2.push(cluster1_dest_cluster_2[i].elements.length);
     }
 
-    let len_d_3 = [];
+
     for (let i = 0; i < cluster1_dest_cluster_3.length; i++) {
         len_d_3.push(cluster1_dest_cluster_3[i].elements.length);
     }
 
-    let len_d_4 = [];
+
     for (let i = 0; i < cluster1_dest_cluster_4.length; i++) {
         len_d_4.push(cluster1_dest_cluster_4[i].elements.length);
     }
 
-    let len_d_5 = [];
+   
     for (let i = 0; i < cluster1_dest_cluster_5.length; i++) {
         len_d_5.push(cluster1_dest_cluster_5[i].elements.length);
     }
