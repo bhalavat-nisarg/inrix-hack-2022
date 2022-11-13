@@ -1,7 +1,7 @@
 let geocluster = require('geocluster');
 let fs = require('fs');
 
-export function cluster() {
+export async function cluster() {
     let text = fs.readFileSync('./exported/data1-0.json');
 
     const data = JSON.parse(text)['data'];
@@ -15,7 +15,6 @@ export function cluster() {
     }
     const bias = 0.05;
     let result = geocluster(coordinates, bias);
-    console.log(result);
 
     let len = [];
 
@@ -25,7 +24,6 @@ export function cluster() {
 
     let len1 = [...len];
     let topValues = len.sort((a, b) => b - a).slice(0, 5);
-
     let idxs = [];
     for (let i = 0; i < topValues.length; i++) {
         let idx = len1.indexOf(topValues[i]);
@@ -37,16 +35,13 @@ export function cluster() {
         final_result.push(result[idxs[i]]);
     }
 
-    for (let i = 0; i < final_result.length; i++) {
-        test.push(final_result[i].elements.length);
-    }
 
     for (let i = 0; i < data.length; i++) {
         let sLoc = data[i]['startLoc'].split(',');
         let eLoc = data[i]['endLoc'].split(',');
         data_c.push([
-            [Number(sLoc[0]), Number(sLoc[1])],
-            [Number(eLoc[0]), Number(eLoc[1])],
+            [Number(sLoc[1]), Number(sLoc[0])],
+            [Number(eLoc[1]), Number(eLoc[0])],
         ]);
     }
 
@@ -81,14 +76,12 @@ export function cluster() {
         let idx_d = len_d_1.indexOf(topValues_d[i]);
         idxs_d.push(idx_d);
     }
-
     let final_result_d = [];
     for (let i = 0; i < topValues_d.length; i++) {
         final_result_d.push(cluster1_dest_cluster[idxs_d[i]]);
     }
-
     let cluster1_d = [];
-    for (let i = 0; i < final_result_d[0].elements.length; i++) {
+    for (let i = 0; i < final_result_d[0]?.elements.length; i++) {
         cluster1_d.push(final_result_d[0].elements[i]);
     }
 
@@ -100,6 +93,5 @@ export function cluster() {
             }
         }
     });
-
     return c1_ultimate_data;
 }
