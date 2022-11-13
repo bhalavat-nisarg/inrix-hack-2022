@@ -22,8 +22,8 @@ We are providing an efficient way to carpool by clustering the latitudes and lon
 
 ## Authors
 
-- Jagadeesh Marali
-- Nisarg Bhalavat
-- Vaibhav Sachdeva
-- Abhishek Praveenkumar
-- Dhruv Desai
+- [Jagadeesh Marali](https://github.com/jagadeeshmarali)
+- [Nisarg Bhalavat](https://github.com/bhalavat-nisarg)
+- [Vaibhav Sachdeva](https://github.com/Vaibhav-Sachdeva)
+- [Abhishek Praveenkumar](https://github.com/ABHISHEK22415)
+- [Dhruv Desai](https://github.com/Dhruv590)
