@@ -1,10 +1,14 @@
 # Pool IT
 
-Carpooling made Smarter and Greener
+Pool IT is for both!. If you drive to work on a regular basis, sign up to find passengers and
+enjoy the benefits of HOV or express lanes, share the costs of driving, and enjoy the
+company. If you don’t like driving, want to limit your driving, or don’t have a car, sign up to
+find a driver. Carpool matching works when there is a balance between commuters who
+want to ride and who want to drive. 
 
 ## Inspiration
 
-In recent years, the economic, and environmental factors have encouraged people to save natural resources and opt for a greener approach. Carpooling becomes a more prevalent approach to save these resources as carpooling would mean that we reduce the usage of fuel consumption, and reduce traffic congestion on roads. This way we can reduce abuse of roads and reduce emissions.
+In recent years, the economic, and environmental factors have encouraged people to save natural resources and opt for a greener approach. Carpooling becomes a more prevalent approach to save these resources as carpooling would mean that we reduce the usage of fuel consumption, and reduce traffic congestion on roads. This way we can reduce abuse of roads and reduce emissions. 
 
 ## What it does
 
@@ -12,7 +16,11 @@ We are providing an efficient way to carpool by clustering the latitudes and lon
 
 ## How we built it
 
+We have use angularjs for the forntend with the help leaflate maps to show case data on the map. Using the nodejs and expressJs framework for the api calls in the backend. We used INRIX's trade area trips API to get the consumer trip data, i.e. `startLoc` and `endLoc`. In order to get the Start location and end location points cluster's we have use k-means machine learning algorithem to cluster the data from the api. 
+
 ## Challenges we ran into
+
+
 
 ## Accomplishments that we're proud of
 
