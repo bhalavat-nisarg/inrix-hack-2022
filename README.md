@@ -4,28 +4,26 @@ Carpooling made Smarter and Greener
 
 ## Inspiration
 
-Some Text here
+In recent years, the economic, and environmental factors have encouraged people to save natural resources and opt for a greener approach. Carpooling becomes a more prevalent approach to save these resources as carpooling would mean that we reduce the usage of fuel consumption, and reduce traffic congestion on roads. This way we can reduce abuse of roads and reduce emissions.
 
-## What the project does
+## What it does
 
-Some Text Here
+We are providing an efficient way to carpool by clustering the latitudes and longitudes using K-Means algorithm. Using this algorithm we have the start location cluster and end location cluster so that the car deployments can be optimized in areas having higher density. We used [INRIX](https://inrix.com/)'s [Trade Area Trips API](https://docs.inrix.com/analytics/tradeareatrips/) to get the consumer trip data, i.e. `startLoc` and `endLoc`.
 
 ## How we built it
 
-Some Text here
-
 ## Challenges we ran into
 
-Some Text Here
-
-## Accomplishments that we are proud of
-
-Some Text Here
+## Accomplishments that we're proud of
 
 ## What we learned
 
-Some Text Here
+## What's next for Pool IT
 
-## What's next (Future Scope)
+## Authors
 
-Some Text Here
+- [Jagadeesh Marali](https://github.com/jagadeeshmarali)
+- [Nisarg Bhalavat](https://github.com/bhalavat-nisarg)
+- [Vaibhav Sachdeva](https://github.com/Vaibhav-Sachdeva)
+- [Abhishek Praveenkumar](https://github.com/ABHISHEK22415)
+- [Dhruv Desai](https://github.com/Dhruv590)
