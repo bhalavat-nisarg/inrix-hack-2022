@@ -6,6 +6,7 @@ import { OSMPlace } from "../interfaces";
 import * as debounce from "debounce";
 import { generateRandomColor } from '../utils';
 import 'leaflet.markercluster';
+import { Control } from "leaflet";
 
 // import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 // const provider = new OpenStreetMapProvider();
@@ -61,57 +62,7 @@ export class MapComponent implements AfterViewInit {
     tiles.addTo(this.map);
   }
 
-  getCluster() {
-    this.http.get("http://localhost:3000/getCluster").toPromise().then((data: []) => {
-      let points = []
-      for (let i = 0; i < data?.length; i++) {
-        points.push(this.getgeojsonFeature([data[i][0], data[i][1]]))
-      }
-      const marker = L.markerClusterGroup()
-      console.log(points)
-      this.featureCollections.features = points
-      console.log(this.featureCollections)
-      L.geoJSON(this.featureCollections, {
-        onEachFeature: function (feature, layer) {
 
-          const popupContent =
-            '<h4 class = "text-primary">Street Light</h4>' +
-            '<div class="container"><table class="table table-striped">' +
-            "<thead><tr><th>Properties</th><th>Value</th></tr></thead>" +
-            "<tbody><tr><td> Name </td><td>" +
-            feature.properties.density +
-            "</td></tr>" +
-            "<tr><td>Elevation </td><td>" +
-            feature.properties.ele +
-            "</td></tr>" +
-            "<tr><td> Power (watt) </td><td>" +
-            feature.properties.Power_Watt +
-            "</td></tr>" +
-            "<tr><td> Pole Height </td><td>" +
-            feature.properties.pole_hgt +
-            "</td></tr>" +
-            "<tr><td> Time </td><td>" +
-            feature.properties.time +
-            "</td></tr>";
-
-          layer.bindPopup(popupContent);
-
-        },
-        pointToLayer: function (feature, latlang) {
-          return marker.addLayer(L.circleMarker(latlang, {
-            radius: 8,
-            fillColor: generateRandomColor(),
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-          }))
-        }
-      }).addTo(this.map);
-      this.map.addLayer(marker)
-    })
-
-  }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -131,10 +82,13 @@ export class MapComponent implements AfterViewInit {
     this.map.setView([res.lat, res.lon], 12)
     new L.Circle([res.lat, res.lon], { color: 'red', radius: 500 }).addTo(this.map);
     L.marker([res.lat, res.lon]).addTo(this.map);
-    this.http.get(`http://localhost:3000/getTripsByDate?point=${res.lat}%7C${res.lon}&radius=500ft`).toPromise().then((data: []) => {
+    this.http.get(`http://localhost:3000/getTripsByDate?point=${res.lat}%7C${res.lon}&radius=500ft`).toPromise().then((data: [[any]]) => {
       let points = []
+      console.log(data)
       for (let i = 0; i < data?.length; i++) {
-        points.push(this.getgeojsonFeature([data[i][0], data[i][1]]))
+        for (let j = 0; j < data[i]?.length; j++) {
+          points.push(this.getgeojsonFeature([data[i][j][0], data[i][j][1]]))
+        }
       }
       const marker = L.markerClusterGroup()
       console.log(points)
@@ -176,6 +130,22 @@ export class MapComponent implements AfterViewInit {
           }))
         }
       }).addTo(this.map);
+      // var info = new L.Control();
+
+      // info.onAdd = function (map) {
+      //   this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+      //   // this.update();
+      //   return this._div;
+      // };
+
+      // method that we will use to update the control based on feature properties passed
+      // info. = function (props) {
+      //   this._div.innerHTML = '<h4>US Population Density</h4>' + (props ?
+      //     '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+      //     : 'Hover over a state');
+      // };
+
+      // info.addTo(this.map);
       this.map.addLayer(marker)
       console.log(data);
     })
