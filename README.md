@@ -1,6 +1,6 @@
 # Pool IT
 
-Pool IT is for both!. If you drive to work on a regular basis, sign up to find passengers and
+Pool IT! If you drive to work on a regular basis, sign up to find passengers and
 enjoy the benefits of HOV or express lanes, share the costs of driving, and enjoy the
 company. If you don’t like driving, want to limit your driving, or don’t have a car, sign up to
 find a driver. Carpool matching works when there is a balance between commuters who
