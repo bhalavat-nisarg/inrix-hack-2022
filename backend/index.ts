@@ -21,12 +21,13 @@ app.get('/getTripsByDate', async (req, res) => {
   let endDate: string = req.query.endDate;
 
   let data = await tradeAreaTrips(point, radius, startDate, endDate);
-  res.send(data);
+  // res.send(data);
+  res.send(await cluster(data));
 });
 
 app.get('/getCluster', async (req, res) => {
-  console.log('getting Response');
-  res.send(await cluster());
+  // console.log('getting Response');
+  res.send(await cluster(""));
 });
 
 app.listen(port, () => {
@@ -51,7 +52,7 @@ async function tradeAreaTrips(
     let od: string = 'destination';
     let geoFilterType: string = 'circle';
     // let radius: string = '500ft';
-    let limit: number = 10;
+    let limit: number = 3000;
     //let provider: string = 'consumer';
     let startDt = startDate || '%3E%3D2022-01-01T00%3A00';
     let endDt = endDate || '%3C%3D2022-06-30T00%3A00';

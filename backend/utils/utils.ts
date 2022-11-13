@@ -1,15 +1,15 @@
 let geocluster = require('geocluster');
 let fs = require('fs');
 
-export async function cluster() {
+export async function cluster(mapDataPoint) {
     let text = fs.readFileSync('./exported/data1-0.json');
 
-    const data = JSON.parse(text)['data'];
+    const data = mapDataPoint['data'];
     let coordinates = [];
     let test = [];
     let data_c = [];
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data?.length; i++) {
         let arr = data[i]['startLoc'].split(',');
         coordinates.push([Number(arr[1]), Number(arr[0])]);
     }

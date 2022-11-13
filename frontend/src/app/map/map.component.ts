@@ -38,7 +38,7 @@ export class MapComponent implements AfterViewInit {
   }
   featureCollections: geojson.FeatureCollection = { "type": "FeatureCollection", "features": [] }
   constructor(public http: HttpClient) {
-    this.getCluster()
+    // this.getCluster()
 
   }
   async searchOSMApi() {
@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [37.828226, -122.428207],
+      center: [47.644128460181875, -122.20360989999998],
       zoom: 12
     });
 
@@ -104,6 +104,32 @@ export class MapComponent implements AfterViewInit {
     this.searchBoxAddress = res?.display_name ?? "";
     this.searchAddress.clear();
     console.log(res);
+    this.map.setView([res.lat, res.lon], 12)
+    L.marker([res.lat, res.lon]).addTo(this.map);
+    this.http.get(`http://localhost:3000/getTripsByDate?point=${res.lat}%7C${res.lon}&radius=500ft`).toPromise().then((data: []) => {
+      let points = []
+      for (let i = 0; i < data?.length; i++) {
+        points.push(this.getgeojsonFeature([data[i][0], data[i][1]]))
+      }
+      const marker = L.markerClusterGroup()
+      console.log(points)
+      this.featureCollections.features = points
+      console.log(this.featureCollections)
+      L.geoJSON(this.featureCollections, {
+        pointToLayer: function (feature, latlang) {
+          return marker.addLayer(L.circleMarker(latlang, {
+            radius: 8,
+            fillColor: generateRandomColor(),
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+          }))
+        }
+      }).addTo(this.map);
+      this.map.addLayer(marker)
+      console.log(data);
+    })
     // this.getDateData((res?.lat ?? 0).toString(),(res?.lon ?? 0).toString());
   }
 
