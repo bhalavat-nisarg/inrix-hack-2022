@@ -30,6 +30,8 @@ export class MapComponent implements AfterViewInit {
       "type": "Feature",
       "properties": {
         "density": coordinates?.length,
+        "source": coordinates[0],
+        "destination": coordinates[1]
       },
       "geometry": {
         "type": "MultiPoint",
@@ -50,7 +52,7 @@ export class MapComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       center: [37.788848, -122.425186],
-      zoom: 12
+      zoom: 14
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -79,7 +81,7 @@ export class MapComponent implements AfterViewInit {
     this.selectedAddress = res;
     this.searchBoxAddress = res?.display_name ?? "";
     this.searchAddress.clear();
-    this.map.setView([res.lat, res.lon], 12)
+    this.map.setView([res.lat, res.lon], 14)
     new L.Circle([res.lat, res.lon], { color: 'red', radius: 500 }).addTo(this.map);
     L.marker([res.lat, res.lon]).addTo(this.map);
     this.http.get(`http://localhost:3000/getTripsByDate?point=${res.lat}%7C${res.lon}&radius=500ft`).toPromise().then((data: [[any]]) => {
@@ -102,13 +104,13 @@ export class MapComponent implements AfterViewInit {
             "<thead><tr><th>Properties</th><th>Value</th></tr></thead>" +
             "<tbody><tr><td> Density </td><td>" +
             feature.properties.density +
+            "</td></tr>" +
+            "<tr><td>Source </td><td>" +
+            feature.properties.source +
+            "</td></tr>" +
+            "<tr><td> Destination </td><td>" +
+            feature.properties.destination +
             "</td></tr>";
-          // "<tr><td>Elevation </td><td>" +
-          // feature.properties.ele +
-          // "</td></tr>" +
-          // "<tr><td> Power (watt) </td><td>" +
-          // feature.properties.Power_Watt +
-          // "</td></tr>" +
           // "<tr><td> Pole Height </td><td>" +
           // feature.properties.pole_hgt +
           // "</td></tr>" +
@@ -120,6 +122,7 @@ export class MapComponent implements AfterViewInit {
 
         },
         pointToLayer: function (feature, latlang) {
+          marker.setStyle({ color: generateRandomColor(), weight: 2, fillColor: generateRandomColor() });
           return marker.addLayer(L.circleMarker(latlang, {
             radius: 8,
             fillColor: generateRandomColor(),
@@ -127,7 +130,13 @@ export class MapComponent implements AfterViewInit {
             weight: 1,
             opacity: 1,
             fillOpacity: 0.8
-          }))
+          })).setStyle({
+            fillColor: generateRandomColor(),
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+          })
         }
       }).addTo(this.map);
       // var info = new L.Control();
@@ -147,6 +156,10 @@ export class MapComponent implements AfterViewInit {
 
       // info.addTo(this.map);
       this.map.addLayer(marker)
+      marker.on('clusterclick', function (a) {
+        // a.layer is actually a cluster
+        console.log('cluster ' + a.layer.getAllChildMarkers().length);
+      });
       console.log(data);
     })
     // this.getDateData((res?.lat ?? 0).toString(),(res?.lon ?? 0).toString());
