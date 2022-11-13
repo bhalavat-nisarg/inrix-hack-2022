@@ -4,21 +4,25 @@ Pool IT! If you drive to work on a regular basis, sign up to find passengers and
 enjoy the benefits of HOV or express lanes, share the costs of driving, and enjoy the
 company. If you don’t like driving, want to limit your driving, or don’t have a car, sign up to
 find a driver. Carpool matching works when there is a balance between commuters who
-want to ride and who want to drive. 
+want to ride and who want to drive.
+
+![Alt text](./images/Pool_IT_1.png)
 
 ## Inspiration
 
-In the past, Many taxi companies have spent around $250 billion on optimizing the solution for carpooling. The massively profitable industry is pushing them towards improving the constraint of carpooling services. By understanding the use cases of the people we were able to implement the solution which solves 3 important problems: time, efficiency, and less harm to the environment. Also helping nearby people who want to reach the same place in less amount of time.  When we were confronted with this idea, our team noted its potential for a  business point where they can have a count of people over the nearby place and disburse the required amount of cars according to the need. That way leading towards the end goal and allowing to get optimized for the individual users. This information could even help businesses decide which place to deploy more amount of cars in such a way that many people will be able to reach their destination at their particular requested time.
+In the past, Many taxi companies have spent around $250 billion on optimizing the solution for carpooling. The massively profitable industry is pushing them towards improving the constraint of carpooling services. By understanding the use cases of the people we were able to implement the solution which solves 3 important problems: time, efficiency, and less harm to the environment. Also helping nearby people who want to reach the same place in less amount of time. When we were confronted with this idea, our team noted its potential for a business point where they can have a count of people over the nearby place and disburse the required amount of cars according to the need. That way leading towards the end goal and allowing to get optimized for the individual users. This information could even help businesses decide which place to deploy more amount of cars in such a way that many people will be able to reach their destination at their particular requested time.
 
 ## What it does
 
-After receiving the address of a location as input, the program returns local trip information within the standard radius of 500 feet collected from the INRIX Trade Trip API over some time. Within that radius, we could find the number of source nodes compared to other source nodes moving toward the same destination.  It combines the number of persons going towards the same destination leading to a grouping cluster. This way they will be able to get a carpool to reach towards destination within the time requested.
+After receiving the address of a location as input, the program returns local trip information within the standard radius of 500 feet collected from the INRIX Trade Trip API over some time. Within that radius, we could find the number of source nodes compared to other source nodes moving toward the same destination. It combines the number of persons going towards the same destination leading to a grouping cluster. This way they will be able to get a carpool to reach towards destination within the time requested.
 
 ## How we built it
 
 We used technologies such as Typescript, Angular, Node.js, Google API, INRIX (trade- Area Trips ) API, and leaflet.js. This API offers a collection of nearly every trip that INRIX records. For all of these trips, it documents the start time, end time, start location, end location, distance, average speed, and data credibility of each. These data points are incredibly valuable, especially when formatted in a user-friendly way. We used a mathematical formula to compute the shortest distance between two source entities (K-means algorithm) and determine their final position trough by comparing their endpoints.
 
 The "Trade Area Trips" API is what powers the entire application. This API provides access to almost all of the trips that INRIX records. It records the start time, end time, starting location, finishing location, distance, average speed, and data reliability for each of these journeys. These facts are immensely useful, especially when presented in an approachable fashion. We analyze and present this data on a color-coded map to make it palatable for the general public. Angular was used to create the front-end website that shows the map, and Node.js was used to create the back end that processes the data from INRIX's API. The Leaflet package and Chart.js are both used in the frontend web application to display our data on a map.
+
+![Alt text](./images/Pool_IT_2.jpg)
 
 ## Challenges we ran into
 
@@ -38,8 +42,8 @@ Many of the features that were added after the initial capability of showing per
 
 ## Authors
 
-- [Jagadeesh Marali](https://github.com/jagadeeshmarali)
-- [Nisarg Bhalavat](https://github.com/bhalavat-nisarg)
-- [Vaibhav Sachdeva](https://github.com/Vaibhav-Sachdeva)
-- [Abhishek Praveenkumar](https://github.com/ABHISHEK22415)
-- [Dhruv Desai](https://github.com/Dhruv590)
+-   [Jagadeesh Marali](https://github.com/jagadeeshmarali)
+-   [Nisarg Bhalavat](https://github.com/bhalavat-nisarg)
+-   [Vaibhav Sachdeva](https://github.com/Vaibhav-Sachdeva)
+-   [Abhishek Praveenkumar](https://github.com/ABHISHEK22415)
+-   [Dhruv Desai](https://github.com/Dhruv590)
