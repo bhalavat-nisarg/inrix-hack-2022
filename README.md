@@ -30,8 +30,8 @@ We have use angularjs for the forntend with the help leaflate maps to show case 
 
 ## Authors
 
-- Jagadeesh Marali
-- Nisarg Bhalavat
-- Vaibhav Sachdeva
-- Abhishek Praveenkumar
-- Dhruv Desai
+- [Jagadeesh Marali](https://github.com/jagadeeshmarali)
+- [Nisarg Bhalavat](https://github.com/bhalavat-nisarg)
+- [Vaibhav Sachdeva](https://github.com/Vaibhav-Sachdeva)
+- [Abhishek Praveenkumar](https://github.com/ABHISHEK22415)
+- [Dhruv Desai](https://github.com/Dhruv590)
