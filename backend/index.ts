@@ -52,7 +52,7 @@ async function tradeAreaTrips(
     let od: string = 'destination';
     let geoFilterType: string = 'circle';
     // let radius: string = '500ft';
-    let limit: number = 3000;
+    let limit: number = 1000;
     //let provider: string = 'consumer';
     let startDt = startDate || '%3E%3D2022-01-01T00%3A00';
     let endDt = endDate || '%3C%3D2022-06-30T00%3A00';

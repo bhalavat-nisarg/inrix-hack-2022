@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit {
     return {
       "type": "Feature",
       "properties": {
-        "density": coordinates.length
+        "density": coordinates?.length,
       },
       "geometry": {
         "type": "MultiPoint",
@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [47.644128460181875, -122.20360989999998],
+      center: [37.788848, -122.425186],
       zoom: 12
     });
 
@@ -72,6 +72,31 @@ export class MapComponent implements AfterViewInit {
       this.featureCollections.features = points
       console.log(this.featureCollections)
       L.geoJSON(this.featureCollections, {
+        onEachFeature: function (feature, layer) {
+
+          const popupContent =
+            '<h4 class = "text-primary">Street Light</h4>' +
+            '<div class="container"><table class="table table-striped">' +
+            "<thead><tr><th>Properties</th><th>Value</th></tr></thead>" +
+            "<tbody><tr><td> Name </td><td>" +
+            feature.properties.density +
+            "</td></tr>" +
+            "<tr><td>Elevation </td><td>" +
+            feature.properties.ele +
+            "</td></tr>" +
+            "<tr><td> Power (watt) </td><td>" +
+            feature.properties.Power_Watt +
+            "</td></tr>" +
+            "<tr><td> Pole Height </td><td>" +
+            feature.properties.pole_hgt +
+            "</td></tr>" +
+            "<tr><td> Time </td><td>" +
+            feature.properties.time +
+            "</td></tr>";
+
+          layer.bindPopup(popupContent);
+
+        },
         pointToLayer: function (feature, latlang) {
           return marker.addLayer(L.circleMarker(latlang, {
             radius: 8,
@@ -103,8 +128,8 @@ export class MapComponent implements AfterViewInit {
     this.selectedAddress = res;
     this.searchBoxAddress = res?.display_name ?? "";
     this.searchAddress.clear();
-    console.log(res);
     this.map.setView([res.lat, res.lon], 12)
+    new L.Circle([res.lat, res.lon], { color: 'red', radius: 500 }).addTo(this.map);
     L.marker([res.lat, res.lon]).addTo(this.map);
     this.http.get(`http://localhost:3000/getTripsByDate?point=${res.lat}%7C${res.lon}&radius=500ft`).toPromise().then((data: []) => {
       let points = []
@@ -113,9 +138,33 @@ export class MapComponent implements AfterViewInit {
       }
       const marker = L.markerClusterGroup()
       console.log(points)
-      this.featureCollections.features = points
-      console.log(this.featureCollections)
+      this.featureCollections.features = points;
       L.geoJSON(this.featureCollections, {
+        onEachFeature: function (feature, layer) {
+
+          const popupContent =
+            '<h4 class = "text-primary">Cluster</h4>' +
+            '<div class="container"><table class="table table-striped">' +
+            "<thead><tr><th>Properties</th><th>Value</th></tr></thead>" +
+            "<tbody><tr><td> Density </td><td>" +
+            feature.properties.density +
+            "</td></tr>";
+          // "<tr><td>Elevation </td><td>" +
+          // feature.properties.ele +
+          // "</td></tr>" +
+          // "<tr><td> Power (watt) </td><td>" +
+          // feature.properties.Power_Watt +
+          // "</td></tr>" +
+          // "<tr><td> Pole Height </td><td>" +
+          // feature.properties.pole_hgt +
+          // "</td></tr>" +
+          // "<tr><td> Time </td><td>" +
+          // feature.properties.time +
+          // "</td></tr>";
+
+          layer.bindPopup(popupContent);
+
+        },
         pointToLayer: function (feature, latlang) {
           return marker.addLayer(L.circleMarker(latlang, {
             radius: 8,
