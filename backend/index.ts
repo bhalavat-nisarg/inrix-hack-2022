@@ -9,7 +9,7 @@ dotenv.config();
 
 const appId = process.env.APP_ID;
 const hash = process.env.HASH;
-
+import { cluster } from "./utils";
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -33,7 +33,10 @@ app.get("/getTripsByDate", async (req, res) => {
   //Here you would probably send send your data off to another function.
   res.send(data);
 });
-
+app.get("/getCluster", async (req, res) => {
+  console.log("getting Response")
+  res.send(cluster())
+})
 app.get("/rawInrix", async (req, res) => {
   //37.792137265306124%7C-122.4107742857143 data.json - random
   //37.778377%7C-122.418107 data2 - Bill Graham
@@ -170,7 +173,7 @@ async function fetchToken() {
       // if (response.status === 200) {
       // this.accessToken = response.data;
       // console.log(response.data);
-      return "Bearer " + response.data.result.token;
+      return response.data.result.token;
       // }
     })
     .catch((error) => {
@@ -202,10 +205,10 @@ async function tradeAreaTrips(point, startDate) {
     let endDate: string = "%3C%3D2020-12-31T00%3A00";
     let endPointType: number = 3;
     //tripLength is given
-
+    let token = await fetchToken()
     const tripsResponse = await axios
-      .get("https://api.iq.inrix.com/v1/trips?" +
-        "od=" + od + "&geoFilterType=" + geoFilterType +
+      .get("https://api.iq.inrix.com/v1/trips?" + "accessToken=" + token +
+        "&od=" + od + "&geoFilterType=" + geoFilterType +
         "&radius=" + radius + "&points=" + point +
         "&limit=" + limit.toString() + "&startDateTime=" + startDate + "&endDateTime=" + endDate + "", axiosConfig)
       // .get("https://api.iq.inrix.com/v1/trips?od="+od+"&geoFilterType="+geoFilterType+"&points="+point+"&limit="+limit
