@@ -1,18 +1,20 @@
 import { AfterViewInit, Component } from "@angular/core";
-import * as L from 'leaflet';
 import * as geojson from 'geojson';
 import { HttpClient } from '@angular/common/http';
 import { OSMPlace } from "../interfaces";
-import * as debounce from "debounce";
+import debounce from "debounce";
 import { generateRandomColor } from '../utils';
 import 'leaflet.markercluster';
-import { Control } from "leaflet";
+
+// angular.json loads Leaflet once; markercluster extends that global instance.
+declare const L: typeof import('leaflet');
 
 // import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 // const provider = new OpenStreetMapProvider();
 
 
 @Component({
+  standalone: false,
   selector: "app-map",
   templateUrl: "./map.component.html",
   styleUrls: ['./map.component.css']

@@ -1,5 +1,16 @@
 # Pool IT
 
+## Development and validation
+
+Use Node.js 22.12 or newer. In `frontend`, run `npm ci`, `npm run lint`,
+`npm run build -- --configuration production`, and
+`npm test -- --watch=false --browsers=ChromeHeadless`. Tests use stubbed HTTP
+responses and do not call INRIX or geocoding services.
+
+The frontend uses a coordinated Angular 21/Material 21/TypeScript 5.9 toolchain,
+while retaining its existing NgModule-based map UI. In `backend`, run `npm ci`
+and `npm run build -- --noEmit` for a TypeScript check.
+
 Pool IT! If you drive to work on a regular basis, sign up to find passengers and
 enjoy the benefits of HOV or express lanes, share the costs of driving, and enjoy the
 company. If you don’t like driving, want to limit your driving, or don’t have a car, sign up to
